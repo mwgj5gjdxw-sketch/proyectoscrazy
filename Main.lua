@@ -116,8 +116,8 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
  255, 255)
     main.BackgroundTransparency = 0.150
     main.Position = UDim2.new(0.5, 0, 2, 0)
-    -- MODIFICACIÓN DEL TAMAÑO DE LA UI AQUÍ
-    main.Size = UDim2.new(0, 500, 0, 400) -- Reducido de (0, 721, 0, 584)
+    -- MODIFICACIÓN DEL TAMAÑO PRINCIPAL A UN TAMAÑO MÁS PEQUEÑO (450x350)
+    main.Size = UDim2.new(0, 450, 0, 350) 
     -- FIN DE LA MODIFICACIÓN
 
     local uc = Instance.new("UICorner")
@@ -171,8 +171,11 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     workarea.Name = "workarea"
     workarea.Parent = main
     workarea.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    workarea.Position = UDim2.new(0.36403501, 0, 0, 0)
-    workarea.Size = UDim2.new(0, 458, 0, 584)
+    -- AJUSTE DE POSICIÓN Y TAMAÑO PARA EL NUEVO TAMAÑO DEL MAIN
+    workarea.Position = UDim2.new(0, 240, 0, 0) 
+    workarea.Size = UDim2.new(0, 210, 0, 350) -- Ancho reducido, Alto igual al nuevo Main
+    -- FIN DEL AJUSTE
+    
 
     local uc_2 = Instance.new("UICorner")
     uc_2.CornerRadius = UDim.new(0, 18)
@@ -183,8 +186,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     workareacornerhider.Parent = workarea
     workareacornerhider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     workareacornerhider.BorderSizePixel = 0
+    -- AJUSTE DE ALTURA PARA EL NUEVO TAMAÑO
     workareacornerhider.Size = UDim2.new(0, 
- 18, 0.99895674, 0)
+ 18, 1, 0)
+    -- FIN DEL AJUSTE
 
 
     -- searchbar
@@ -193,7 +198,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     search.Name = "search"
     search.Parent = main
     search.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    search.Position = UDim2.new(0.0256588068, 0, 0.0958904102, 0)
+    -- AJUSTE DE POSICIÓN
+    search.Position = UDim2.new(0, 10, 0, 40)
+    -- FIN DEL AJUSTE
     search.Size = UDim2.new(0, 225, 0, 34)
 
     local uc_8 = Instance.new("UICorner")
@@ -244,8 +251,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
    sidebar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     sidebar.BackgroundTransparency = 1
     sidebar.BorderSizePixel = 0
-    sidebar.Position = UDim2.new(0.0249653254, 0, 0.181506842, 0)
-    sidebar.Size = UDim2.new(0, 233, 0, 463)
+    -- AJUSTE DE POSICIÓN Y TAMAÑO
+    sidebar.Position = UDim2.new(0, 10, 0, 80)
+    sidebar.Size = UDim2.new(0, 225, 0, 260) -- Ancho reducido y altura ajustada
+    -- FIN DEL AJUSTE
     sidebar.AutomaticCanvasSize = "Y"
     sidebar.CanvasSize = UDim2.new(0, 0, 0, 0)
     sidebar.ScrollBarThickness = 2
@@ -360,8 +369,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     title.BackgroundTransparency = 1
     title.BorderSizePixel = 2
-    title.Position = UDim2.new(0.389000326, 0, 0.0351027399, 0)
-    title.Size = UDim2.new(0, 400, 0, 15)
+    -- AJUSTE DE POSICIÓN Y TAMAÑO
+    title.Position = UDim2.new(0, 250, 0, 20)
+    title.Size = UDim2.new(0, 180, 0, 30) -- Ancho ajustado para Workarea
+    -- FIN DEL AJUSTE
     title.Font = Enum.Font.Gotham
     title.LineHeight = 1.180
     title.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -377,7 +388,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif.AnchorPoint = Vector2.new(0.5, 0.5)
     notif.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     notif.Position = UDim2.new(0.5, 0, 0.5, 0)
-    notif.Size = UDim2.new(0, 304, 0, 362)
+    -- AJUSTE DE TAMAÑO PARA NOTIFICACIÓN
+    notif.Size = UDim2.new(0, 280, 0, 320)
+    -- FIN DEL AJUSTE
     notif.Visible = false
     notif.ZIndex = 3
 
@@ -431,8 +444,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notifdarkness.AnchorPoint = Vector2.new(0.5, 0.5)
     notifdarkness.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     notifdarkness.BackgroundTransparency = 0.600
+    -- AJUSTE DE TAMAÑO PARA CUBRIR EL NUEVO MAIN
     notifdarkness.Position = UDim2.new(0.5, 0, 0.5, 0)
-    notifdarkness.Size = UDim2.new(0, 721, 0, 584)
+    notifdarkness.Size = UDim2.new(0, 450, 0, 350)
+    -- FIN DEL AJUSTE
     notifdarkness.ZIndex = 2
 
     local uc_13 = Instance.new("UICorner")
@@ -476,7 +491,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2.AnchorPoint = Vector2.new(0.5, 0.5)
     notif2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     notif2.Position = UDim2.new(0.5, 0, 0.5, 0)
-    notif2.Size = UDim2.new(0, 304, 0, 362)
+    -- AJUSTE DE TAMAÑO PARA NOTIFICACIÓN
+    notif2.Size = UDim2.new(0, 280, 0, 320)
+    -- FIN DEL AJUSTE
     notif2.Visible = false
     notif2.ZIndex = 3
 
@@ -562,8 +579,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     notif2darkness.AnchorPoint = Vector2.new(0.5, 0.5)
     notif2darkness.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
     notif2darkness.BackgroundTransparency = 0.600
+    -- AJUSTE DE TAMAÑO PARA CUBRIR EL NUEVO MAIN
     notif2darkness.Position = UDim2.new(0.5, 0, 0.5, 0)
-    notif2darkness.Size = UDim2.new(0, 721, 0, 584)
+    notif2darkness.Size = UDim2.new(0, 450, 0, 350)
+    -- FIN DEL AJUSTE
     notif2darkness.ZIndex = 2
 
 
@@ -795,7 +814,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         sidebar2.Parent = sidebar
         sidebar2.BackgroundColor3 = Color3.fromRGB(21, 103, 251)
         sidebar2.BackgroundTransparency = 1
-        sidebar2.Size = UDim2.new(0, 226, 0, 37)
+        -- AJUSTE DE ANCHO PARA SECCIÓN
+        sidebar2.Size = UDim2.new(0, 215, 0, 37) -- Ancho ajustado para el nuevo Sidebar
+        -- FIN DEL AJUSTE
         sidebar2.ZIndex = 2
   
         sidebar2.AutoButtonColor = false
@@ -817,9 +838,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         workareamain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         workareamain.BackgroundTransparency = 1
         workareamain.BorderSizePixel = 0
-        workareamain.Position = UDim2.new(0.0393013097, 0, 0.0958904102, 0)
-        workareamain.Size = UDim2.new(0, 422, 0, 512)
-  
+        -- AJUSTE DE POSICIÓN Y TAMAÑO PARA WORKAREA
+        workareamain.Position = UDim2.new(0, 10, 0, 40)
+        workareamain.Size = UDim2.new(0, 190, 0, 300) 
+        -- FIN DEL AJUSTE
         workareamain.ZIndex = 3
         workareamain.CanvasSize = UDim2.new(0, 0, 0, 0)
         workareamain.ScrollBarThickness = 2
@@ -857,7 +879,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             section.BackgroundTransparency = 1
             section.BorderSizePixel = 2
           
-   section.Size = UDim2.new(0, 418, 0, 50)
+   -- AJUSTE DE ANCHO PARA ELEMENTOS INTERNOS
+   section.Size = UDim2.new(0, 185, 0, 50)
+   -- FIN DEL AJUSTE
             section.Font = Enum.Font.Gotham
             section.LineHeight = 1.180
             section.Text = name
@@ -876,7 +900,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     
          button.BackgroundColor3 = Color3.fromRGB(216, 216, 216)
             button.BackgroundTransparency = 1
-            button.Size = UDim2.new(0, 418, 0, 37)
+            -- AJUSTE DE ANCHO PARA ELEMENTOS INTERNOS
+            button.Size = UDim2.new(0, 185, 0, 37)
+            -- FIN DEL AJUSTE
             button.ZIndex = 2
             button.Font = Enum.Font.Gotham
             button.TextColor3 = Color3.fromRGB(21, 103, 251)
@@ -916,7 +942,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             label.BackgroundTransparency = 1
           
    label.BorderSizePixel = 2
-            label.Size = UDim2.new(0, 418, 0, 37)
+   -- AJUSTE DE ANCHO PARA ELEMENTOS INTERNOS
+   label.Size = UDim2.new(0, 185, 0, 37)
+   -- FIN DEL AJUSTE
             label.Font = Enum.Font.Gotham
             label.TextColor3 = Color3.fromRGB(95, 95, 95)
             label.TextSize = 21
@@ -934,7 +962,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             toggleswitch.BackgroundTransparency = 
  1
             toggleswitch.BorderSizePixel = 2
-            toggleswitch.Size = UDim2.new(0, 418, 0, 37)
+   -- AJUSTE DE ANCHO PARA ELEMENTOS INTERNOS
+   toggleswitch.Size = UDim2.new(0, 185, 0, 37)
+   -- FIN DEL AJUSTE
             toggleswitch.Font = Enum.Font.Gotham
             toggleswitch.Text = name
             toggleswitch.TextColor3 = Color3.fromRGB(95, 95, 95)
@@ -945,7 +975,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
 
             local Frame = Instance.new("TextButton")
             Frame.Parent = toggleswitch
-            Frame.Position = UDim2.new(0.832535863, 0, 0.0270270277, 0)
+            -- AJUSTE DE POSICIÓN PARA EL SWITCH
+            Frame.Position = UDim2.new(0.60, 0, 0.0270270277, 0)
+            -- FIN DEL AJUSTE
             Frame.Size = UDim2.new(0, 70, 0, 36)
             Frame.Text=""
         
@@ -1022,7 +1054,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             textfield.BackgroundTransparency = 1
           
    textfield.BorderSizePixel = 2
-            textfield.Size = UDim2.new(0, 418, 0, 37)
+   -- AJUSTE DE ANCHO PARA ELEMENTOS INTERNOS
+   textfield.Size = UDim2.new(0, 185, 0, 37)
+   -- FIN DEL AJUSTE
             textfield.Font = Enum.Font.Gotham
             textfield.Text = name
             textfield.TextColor3 = Color3.fromRGB(95, 95, 95)
@@ -1034,8 +1068,10 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             local Frame_2 = Instance.new("Frame")
             Frame_2.Parent = textfield
             Frame_2.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-            Frame_2.Position = UDim2.new(0.441926777, 0, 0.0270270277, 0)
-            Frame_2.Size = UDim2.new(0, 233, 0, 34)
+            -- AJUSTE DE POSICIÓN Y TAMAÑO
+            Frame_2.Position = UDim2.new(0.40, 0, 0.0270270277, 0)
+            Frame_2.Size = UDim2.new(0, 100, 0, 34)
+            -- FIN DEL AJUSTE
 
             local uc_6 
  = Instance.new("UICorner")
@@ -1051,7 +1087,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
             TextBox.BorderSizePixel = 0
             TextBox.ClipsDescendants = true
             TextBox.Position = UDim2.new(0.0643776804, 0, 0, -2)
-            TextBox.Size = UDim2.new(0, 203, 0, 34)
+            -- AJUSTE DE ANCHO DE TEXTBOX
+            TextBox.Size = UDim2.new(0, 80, 0, 34)
+            -- FIN DEL AJUSTE
             TextBox.ClearTextOnFocus = false
             TextBox.Font = Enum.Font.Gotham
      
