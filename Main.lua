@@ -1,11 +1,7 @@
--- AppleLibrary MINI Version
+-- AppleLibrary MINI FUNCTIONAL Version
 
 local lib = {}
-local sections = {}
-local workareas = {}
-local notifs = {}
-local visible = true
-local dbcooper = false
+lib._tabs = {}
 
 local function tp(ins, pos, time)
     game:GetService("TweenService"):Create(
@@ -25,8 +21,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
 
     local scrgui = Instance.new("ScreenGui")
     scrgui.Parent = cg
+    scrgui.Name = "ScreenGui"
 
-    -- Splash más pequeño
+    -- SPLASH
     if dosplash then
         local splash = Instance.new("Frame")
         splash.Name = "splash"
@@ -37,12 +34,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         splash.Position = UDim2.new(0.5, 0, 2, 0)
         splash.Size = UDim2.new(0, 250, 0, 250)
 
-        local uc = Instance.new("UICorner")
-        uc.CornerRadius = UDim.new(0, 16)
-        uc.Parent = splash
+        Instance.new("UICorner", splash).CornerRadius = UDim.new(0, 16)
 
         local sicon = Instance.new("ImageLabel")
-        sicon.Name = "sicon"
         sicon.Parent = splash
         sicon.AnchorPoint = Vector2.new(0.5, 0.5)
         sicon.BackgroundTransparency = 1
@@ -56,7 +50,7 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         game:GetService("Debris"):AddItem(splash, 1)
     end
 
-    -- MAIN (reducción grande)
+    -- MAIN WINDOW
     local main = Instance.new("Frame")
     main.Name = "main"
     main.Parent = scrgui
@@ -66,11 +60,11 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     main.Position = UDim2.new(0.5, 0, 2, 0)
     main.Size = UDim2.new(0, 500, 0, 420)
 
-    local uc = Instance.new("UICorner")
-    uc.CornerRadius = UDim.new(0, 14)
-    uc.Parent = main
+    Instance.new("UICorner", main).CornerRadius = UDim.new(0, 14)
 
-    -- Drag system
+    tp(main, UDim2.new(0.5,0,0.5,0), 0.5)
+
+    -- DRAG
     local UIS = game:GetService("UserInputService")
     local dragging, dragStart, startPos
 
@@ -83,14 +77,9 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
     end)
 
     UIS.InputChanged:Connect(function(input)
-        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement) then
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
             local delta = input.Position - dragStart
-            main.Position = UDim2.new(
-                startPos.X.Scale,
-                startPos.X.Offset + delta.X,
-                startPos.Y.Scale,
-                startPos.Y.Offset + delta.Y
-            )
+            main.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
         end
     end)
 
@@ -98,129 +87,95 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         if input.UserInputState == Enum.UserInputState.End then dragging = false end
     end)
 
-    ---------------------------
-    -- WORKAREA reducída
-    ---------------------------
-    local workarea = Instance.new("Frame")
-    workarea.Name = "workarea"
-    workarea.Parent = main
-    workarea.BackgroundColor3 = Color3.fromRGB(255,255,255)
-    workarea.Position = UDim2.new(0.34, 0, 0, 0)
-    workarea.Size = UDim2.new(0, 330, 0, 420)
-
-    local wuc = Instance.new("UICorner")
-    wuc.CornerRadius = UDim.new(0,14)
-    wuc.Parent = workarea
-
-    ---------------------------
-    -- SEARCHBAR pequeña
-    ---------------------------
-    local search = Instance.new("Frame")
-    search.Name = "search"
-    search.Parent = main
-    search.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    search.Position = UDim2.new(0.03, 0, 0.1, 0)
-    search.Size = UDim2.new(0, 180, 0, 28)
-
-    local su = Instance.new("UICorner")
-    su.CornerRadius = UDim.new(0, 8)
-    su.Parent = search
-
-    local searchicon = Instance.new("ImageButton")
-    searchicon.Parent = search
-    searchicon.BackgroundTransparency = 1
-    searchicon.Position = UDim2.new(0.05, 0, 0.15, 0)
-    searchicon.Size = UDim2.new(0, 16, 0, 16)
-    searchicon.Image = "rbxassetid://2804603863"
-    searchicon.ImageColor3 = Color3.fromRGB(95, 95, 95)
-
-    local searchtextbox = Instance.new("TextBox")
-    searchtextbox.Parent = search
-    searchtextbox.BackgroundTransparency = 1
-    searchtextbox.Position = UDim2.new(0.20, 0, 0, 0)
-    searchtextbox.Size = UDim2.new(0, 140, 0, 28)
-    searchtextbox.Font = Enum.Font.Gotham
-    searchtextbox.PlaceholderText = "Search"
-    searchtextbox.TextColor3 = Color3.fromRGB(95, 95, 95)
-    searchtextbox.TextSize = 18
-    searchtextbox.TextXAlignment = Enum.TextXAlignment.Left
-
-    ---------------------------
-    -- SIDEBAR reducida
-    ---------------------------
+    -- SIDEBAR
     local sidebar = Instance.new("ScrollingFrame")
-    sidebar.Name = "sidebar"
     sidebar.Parent = main
-    sidebar.Active = true
+    sidebar.Size = UDim2.new(0, 150, 0, 410)
+    sidebar.Position = UDim2.new(0, 10, 0, 10)
     sidebar.BackgroundTransparency = 1
-    sidebar.Position = UDim2.new(0.03, 0, 0.18, 0)
-    sidebar.Size = UDim2.new(0, 190, 0, 330)
-    sidebar.CanvasSize = UDim2.new(0,0,0,0)
     sidebar.AutomaticCanvasSize = "Y"
     sidebar.ScrollBarThickness = 2
 
     local sb_layout = Instance.new("UIListLayout")
     sb_layout.Parent = sidebar
+    sb_layout.Padding = UDim.new(0, 6)
     sb_layout.SortOrder = Enum.SortOrder.LayoutOrder
-    sb_layout.Padding = UDim.new(0,4)
 
-    ---------------------------
-    -- TOP MAC BUTTONS
-    ---------------------------
-    local buttons = Instance.new("Frame")
-    buttons.Parent = main
-    buttons.Size = UDim2.new(0, 80, 0, 40)
-    buttons.BackgroundTransparency = 1
+    -- WORKAREA
+    local workarea = Instance.new("Frame")
+    workarea.Parent = main
+    workarea.Size = UDim2.new(0, 320, 0, 400)
+    workarea.Position = UDim2.new(0, 170, 0, 10)
+    workarea.BackgroundColor3 = Color3.fromRGB(255,255,255)
+    Instance.new("UICorner", workarea).CornerRadius = UDim.new(0,12)
 
-    local bl = Instance.new("UIListLayout")
-    bl.Parent = buttons
-    bl.FillDirection = Enum.FillDirection.Horizontal
-    bl.HorizontalAlignment = Enum.HorizontalAlignment.Center
-    bl.Padding = UDim.new(0,8)
-
-    -- Close
-    local close = Instance.new("TextButton")
-    close.Parent = buttons
-    close.BackgroundColor3 = Color3.fromRGB(254, 94, 86)
-    close.Size = UDim2.new(0, 14, 0, 14)
-    close.Text = ""
-    Instance.new("UICorner", close).CornerRadius = UDim.new(1,0)
-    close.MouseButton1Click:Connect(function()
-        scrgui:Destroy()
-    end)
-
-    -- Minimize
-    local minimize = Instance.new("TextButton")
-    minimize.Parent = buttons
-    minimize.BackgroundColor3 = Color3.fromRGB(255,189,46)
-    minimize.Size = UDim2.new(0,14,0,14)
-    minimize.Text = ""
-    Instance.new("UICorner", minimize).CornerRadius = UDim.new(1,0)
-
-    -- Resize
-    local resize = Instance.new("TextButton")
-    resize.Parent = buttons
-    resize.BackgroundColor3 = Color3.fromRGB(39,200,63)
-    resize.Size = UDim2.new(0,14,0,14)
-    resize.Text = ""
-    Instance.new("UICorner", resize).CornerRadius = UDim.new(1,0)
-
-    ---------------------------
-    -- TITLE reducido
-    ---------------------------
+    -- TITLE
     local title = Instance.new("TextLabel")
     title.Parent = main
+    title.Position = UDim2.new(0.4,0,0.03,0)
+    title.Size = UDim2.new(0, 200, 0, 20)
     title.BackgroundTransparency = 1
-    title.Position = UDim2.new(0.4, 0, 0.03, 0)
-    title.Size = UDim2.new(0, 200, 0, 15)
-    title.Font = Enum.Font.Gotham
-    title.Text = ti or "AppleLibrary MINI"
-    title.TextSize = 16
-    title.TextColor3 = Color3.fromRGB(0, 0, 0)
+    title.Font = Enum.Font.GothamBold
+    title.Text = ti or "Apple MINI"
+    title.TextSize = 18
+    title.TextColor3 = Color3.fromRGB(0,0,0)
 
-    ---------------------------------------------------
-    -- Desde aquí ya puedes agregar Tabs/Buttons como siempre
-    ---------------------------------------------------
+    -----------------------------------------------------
+    --            TAB SYSTEM (FUNCIONA)
+    -----------------------------------------------------
+    function lib:addTab(name)
+        local tab = {}
+
+        local btn = Instance.new("TextButton")
+        btn.Parent = sidebar
+        btn.Size = UDim2.new(1, -10, 0, 28)
+        btn.BackgroundColor3 = Color3.fromRGB(230,230,230)
+        btn.Text = name
+        btn.Font = Enum.Font.GothamBold
+        btn.TextSize = 14
+        btn.TextColor3 = Color3.fromRGB(60,60,60)
+        Instance.new("UICorner", btn).CornerRadius = UDim.new(0,8)
+
+        local page = Instance.new("ScrollingFrame")
+        page.Parent = workarea
+        page.Size = UDim2.new(1, -10, 1, -10)
+        page.Position = UDim2.new(0,5,0,5)
+        page.Visible = false
+        page.AutomaticCanvasSize = "Y"
+        page.ScrollBarThickness = 3
+        page.BackgroundTransparency = 1
+
+        local layout = Instance.new("UIListLayout")
+        layout.Parent = page
+        layout.Padding = UDim.new(0,6)
+
+        btn.MouseButton1Click:Connect(function()
+            for _, other in pairs(workarea:GetChildren()) do
+                if other:IsA("ScrollingFrame") then
+                    other.Visible = false
+                end
+            end
+            page.Visible = true
+        end)
+
+        function tab:addButton(text, callback)
+            local b = Instance.new("TextButton")
+            b.Parent = page
+            b.Size = UDim2.new(1, -10, 0, 30)
+            b.BackgroundColor3 = Color3.fromRGB(240,240,240)
+            b.Text = text
+            b.Font = Enum.Font.Gotham
+            b.TextSize = 14
+            b.TextColor3 = Color3.fromRGB(30,30,30)
+            Instance.new("UICorner", b).CornerRadius = UDim.new(0,8)
+
+            b.MouseButton1Click:Connect(callback)
+        end
+
+        return tab
+    end
+
+    ------------------------------------------------------
 
     return lib
 end
