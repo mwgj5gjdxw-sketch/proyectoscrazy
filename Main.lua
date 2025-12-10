@@ -101,17 +101,18 @@ function lib:init(ti, dosplash, visiblekey, deleteprevious)
         
 
     local main = Instance.new("Frame")
-    main.Name = "main"
-    main.Parent = scrgui
-    main.AnchorPoint = Vector2.new(0.5, 0.5)
-    main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    main.BackgroundTransparency = 0.150
-    main.Position = UDim2.new(0.5, 0, 2, 0)
-    main.Size = UDim2.new(0, 721, 0, 584)
+main.Name = "main"
+main.Parent = scrgui
+main.AnchorPoint = Vector2.new(0.5, 0.5)
+main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+main.BackgroundTransparency = 0.15
+main.Position = UDim2.new(0.5, 0, 2, 0)
+main.Size = UDim2.new(0, 520, 0, 420)
 
-    local uc = Instance.new("UICorner")
-    uc.CornerRadius = UDim.new(0, 18)
-    uc.Parent = main
+local uc = Instance.new("UICorner")
+uc.CornerRadius = UDim.new(0, 14)
+uc.Parent = main
+
 
     local UserInputService = game:GetService("UserInputService") --- skidded ik
     local dragging
